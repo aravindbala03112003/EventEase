@@ -1,0 +1,51 @@
+services:
+  # 1. Express Backend Web Service
+  - type: web
+    name: eventease-backend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run db:setup && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: eventease-db
+          property: connectionString
+
+  # 2. Next.js Frontend Web Service
+  - type: web
+    name: eventease-frontend
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: eventease-backend
+          property: host
+        transform: https://$VALUE/api
+
+databases:
+  # 3. PostgreSQL Database
+  - name: eventease-db
+    plan: free
+    region: oregon
+    databaseName: eventease
+    user: eventease_user
