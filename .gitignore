@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Production and build outputs
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Environment and sensitive files (CRITICAL: NEVER COMMIT)
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+.system_generated/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
