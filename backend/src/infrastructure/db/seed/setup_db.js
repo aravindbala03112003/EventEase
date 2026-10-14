@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 async function setup() {
   const targetUrl = process.env.DATABASE_URL || 'postgres://postgres:1234@localhost:5432/event';
-  const isRemote = targetUrl.includes('neon.tech') || targetUrl.includes('sslmode=require') || targetUrl.includes('render.com');
+  const isRemote = targetUrl.includes('neon.tech') || targetUrl.includes('sslmode=require') || targetUrl.includes('oregon-postgres.render.com');
 
   if (!process.env.DATABASE_URL) {
     // Local flow: ensure database exists first

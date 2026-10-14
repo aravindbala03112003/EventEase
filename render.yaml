@@ -6,14 +6,12 @@ services:
     plan: free
     region: oregon
     rootDir: backend
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run db:setup && npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
@@ -28,19 +26,13 @@ services:
     plan: free
     region: oregon
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 3000
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: eventease-backend
-          property: host
-        transform: https://$VALUE/api
+        value: https://eventease-backend.onrender.com/api
 
 databases:
   # 3. PostgreSQL Database

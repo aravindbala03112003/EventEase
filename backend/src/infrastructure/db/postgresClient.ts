@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { env } from "../config/env";
 
-const isSsl = env.databaseUrl.includes("sslmode=require") || process.env.NODE_ENV === "production";
+const isSsl = env.databaseUrl.includes("sslmode=require") || env.databaseUrl.includes("neon.tech") || env.databaseUrl.includes("oregon-postgres.render.com");
 
 export const pool = new Pool({
   connectionString: env.databaseUrl,
