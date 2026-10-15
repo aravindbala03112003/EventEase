@@ -6,6 +6,7 @@ node_modules/
 # Production and build outputs
 dist/
 .next/
+.vercel/
 out/
 build/
 *.tsbuildinfo
