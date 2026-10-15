@@ -21,3 +21,5 @@ app.use("/api/bookings", bookingRoutes());
 app.use("/api/rooms", roomRoutes());
 
 app.use(errorHandler);
+
+export default app;
